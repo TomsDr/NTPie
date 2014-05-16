@@ -9,10 +9,12 @@ extends Seeder
     {
         if (empty($this->faker))
         {
-            $this->faker = Faker\Factory::create();
+            $faker = Faker\Factory::create();
+            $faker->addProvider (new Faker\Provider\Base($faker));
+            $faker->addProvider(new Faker\Provider\Lorem($faker));
         }
         
-        return $this->faker;
+        return $this->faker = $faker;;
     }
 
 	public function run()
@@ -20,6 +22,10 @@ extends Seeder
 		//Eloquent::unguard();
 
             $this->call("AccountTableSeeder");
+            $this->call("CategoryTableSeeder");
+            $this->call("ProductTableSeeder");
+            $this->call("OrderTableSeeder");
+            $this->call("OrderItemTableSeeder");
 	}
 
 }
