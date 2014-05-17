@@ -18,6 +18,11 @@ Route::get('/', function()
 });
 */
 
+Route::any("/", [
+    "as" => "index/index",
+    "uses" => "IndexController@indexAction"
+]);
+
 Route::any("category/index", [
     "as" => "category/index",
     "uses" => "CategoryController@indexAction"

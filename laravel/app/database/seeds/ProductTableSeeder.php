@@ -21,7 +21,7 @@ extends DatabaseSeeder
                     "name" => $name,
                     "stock" => $stock, 
                     "price" => $price,
-                    "category_id" => $category_id
+                    "category_id" => $category->id
                 ]);
             }
         }
