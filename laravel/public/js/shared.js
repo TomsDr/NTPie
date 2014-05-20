@@ -14,10 +14,6 @@ app.controller("products", function($scope) {
     $scope.products = this;
 });*/
 
-app.controller("basket", function($scope) {
-    console.log("basket.init:", $scope.main.shared);
-});
-
 app.factory("CategoryService", function($http) {
     return {
         "getCategories": function() {
@@ -58,7 +54,7 @@ app.factory("BasketService", function($cookies){
             for (var i = 0; i < products.length; i++) {
                 var next = products[i];
                 
-                if (next.id == product.id) {
+                if (next.id === product.id) {
                     products.splice(i, 1);
                 }
             }
@@ -87,6 +83,65 @@ app.factory("BasketService", function($cookies){
         }
     };
 });
+
+app.factory("AccountService", function(
+    $http
+  ) {
+        var account = null;
+        
+        return {
+            "authenticate" : function(email, password) {
+                var request = $http.post("/account/authenticate", {
+                    "email" : email,
+                    "password" : password
+                });
+                
+                request.success(function(data) {
+                    if (data.status !== "error") {
+                        account = data.account;
+                    }
+                });
+                
+                return request;
+                
+            },
+            
+            "getAccount" : function() {
+                return account;
+            }
+        };
+    });
+
+app.factory("OrderService", function(
+    $http,
+    AccouuntService,
+    BasketService
+  ) {
+      return {
+          "pay" : function(number, expiry, security) {
+              var account = AccountService.getAccount();
+              var products = BasketService.getProducts();
+              var items = [];
+              
+              for (var i = 0; i < products.length; i++) {
+                  var product = products[i];
+                  
+                  items.push({
+                      "product_id" : product.id,
+                      "quantity" : product.quantity
+                  });
+              }
+              
+              return $http.post("/order/add", {
+                  "account" : account.id,
+                  "items" : JSON.stringify(items),
+                  "number" : number,
+                  "expiry" : expiry,
+                  "security" : security
+              });
+          }
+      };
+  });
 
 app.controller("products", function(
     $scope,
@@ -129,10 +184,65 @@ app.controller("products", function(
     
 });
 
+app.controller("basket", function(
+    $scope,
+    AccountService,
+    BasketService,
+    OrderService
+) {
+    var self = this;
+    
+    this.products = BasketService.getProducts();
+    
+    this.update = function() {
+        BasketService.update();
+    };
+    
+    this.remove = function(product) {
+        BasketService.remove(product);
+    };
+    
+    this.state = "shopping";
+    this.email = "";
+    this.password = "";
+    this.number = "";
+    this.expiry = "";
+    this.security = "";
+    
+    this.authenticate = function() {
+        var details = AccountService.authenticate(self.email, self.password);
+        
+        details.success(function(data) {
+            if (data.status == "ok") {
+                self.state = "paying";
+            }
+        });
+    }
+    
+    this.pay = function() {
+        var details = OrderService.pay(
+            self.number,
+            self.expiry,
+            self.security
+          );
+  
+          details.success(function(data) {
+              BasketService.clear();
+              self.state = "shopping";
+          });
+    }
+    
+    $scope.basket = this;
+});
+
 app.controller("main", function($scope) {
    /* console.log("main.init");
     
     this.shared = "hello world";*/
-    
+   
     $scope.main = this;
 });
+
+
+
+
