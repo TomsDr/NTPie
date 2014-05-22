@@ -23,6 +23,19 @@ extends Eloquent
     {
         return $this->belongsToMany("Product", "order_item");
     }    
+    
+    public function getTotalAttribute()
+    {
+        $total = 0;
+        
+        foreach ($this->orderItem as $orderItem)
+        {
+            $total += $orderItem->price * $orderItem->quantity;
+        }
+        
+        return $total;        
+    }
+    
 }
 
 ?>

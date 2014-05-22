@@ -18,6 +18,12 @@ extends Eloquent
     {
         return $this->belongsTo("Order");
     }
+    
+    public function getTotalAttribute()
+    {
+        return $this->quantity * $this->price;
+    }
+    
 }
 
 ?>

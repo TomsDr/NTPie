@@ -114,7 +114,7 @@ app.factory("AccountService", function(
 
 app.factory("OrderService", function(
     $http,
-    AccouuntService,
+    AccountService,
     BasketService
   ) {
       return {
@@ -184,6 +184,14 @@ app.controller("products", function(
     
 });
 
+app.controller("main", function($scope) {
+   /* console.log("main.init");
+    
+    this.shared = "hello world";*/
+   
+    $scope.main = this;
+});
+
 app.controller("basket", function(
     $scope,
     AccountService,
@@ -213,11 +221,11 @@ app.controller("basket", function(
         var details = AccountService.authenticate(self.email, self.password);
         
         details.success(function(data) {
-            if (data.status == "ok") {
+            if (data.status === "ok") {
                 self.state = "paying";
             }
         });
-    }
+    };
     
     this.pay = function() {
         var details = OrderService.pay(
@@ -230,19 +238,7 @@ app.controller("basket", function(
               BasketService.clear();
               self.state = "shopping";
           });
-    }
+    };
     
     $scope.basket = this;
 });
-
-app.controller("main", function($scope) {
-   /* console.log("main.init");
-    
-    this.shared = "hello world";*/
-   
-    $scope.main = this;
-});
-
-
-
-

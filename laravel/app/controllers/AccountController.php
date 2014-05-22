@@ -19,7 +19,8 @@ extends BaseController
         }
         
         return Response::json([
-            "status" => "error"
+            "status" => "error",
+            $data["error"] = "Username and/or password invalid!"
         ]);
     }
 }
