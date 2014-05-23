@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<CatalogRequest xmlns="urn:XMLLink:eLinkCatalog">
+  <Date>2000-12-27T12:55:46</Date>
+  <CatNumber>1.0</CatNumber>
+  <Route>
+    <From>
+      <ClientID>10726237</ClientID>
+    </From>
+    <To>
+      <ClientID>0</ClientID>
+    </To>
+  </Route>
+  <Filters>
+    <Filter FilterID="VendorID" Value="80001262"/>
+    <Filter FilterID="Price" Value="WOVAT"/>
+  </Filters>
+</CatalogRequest>

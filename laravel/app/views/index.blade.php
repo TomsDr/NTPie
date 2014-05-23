@@ -75,16 +75,17 @@
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'shopping' }">
-                                     <input type="text" class="form-control" placeholder="email" ng-model="basket.email" />
+                                     <input type="text" name="email" class="form-control" placeholder="email" ng-model="basket.email" />
                                  </td>
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'shopping' }">
-                                     <input type="password" class="form-control" placeholder="password" ng-model="basket.password" />
+                                     <input type="password" name="password" class="form-control" placeholder="password" ng-model="basket.password" />
                                  </td>
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'shopping' }">
+                                     <button type="button" class="pull-left btn btn-default" ng-click="basket.register()" >Register</button>
                                      <button type="button" class="pull-left btn btn-default" ng-click="basket.authenticate()" >Authenticate</button>
                                  </td>
                              </tr>
@@ -113,7 +114,7 @@
                  </div>
              </div>
              <div class="row">
-                 <img alt= "Also" src ="http://www.telecom-handel.de/var/ezwebin_site/storage/images/telecom-handel/news/distribution/also-deutschland-goodbye-actebis/540861-1-ger-DE/Also-Deutschland-Goodbye-Actebis_very_large.jpg">
+                 <a href={{ URL::route('also/index') }}><img alt= "Also" src ="http://www.telecom-handel.de/var/ezwebin_site/storage/images/telecom-handel/news/distribution/also-deutschland-goodbye-actebis/540861-1-ger-DE/Also-Deutschland-Goodbye-Actebis_very_large.jpg"></a>
              </div>
          </div>    
          {{ HTML::script('/js/shared.js') }}

@@ -23,4 +23,19 @@ extends BaseController
             $data["error"] = "Username and/or password invalid!"
         ]);
     }
+    /*
+    public function registerAction()
+    {
+        $email = Input::get("email");
+        $password = Input::get("password");
+        
+        
+        $credentials = [
+            "email" => Input::get("email"),
+            "password" => Input::get("password")
+        ];
+        
+        DB::table('Account')->insert($credentials);
+        
+    }*/
 }

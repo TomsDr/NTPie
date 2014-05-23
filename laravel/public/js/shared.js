@@ -90,6 +90,11 @@ app.factory("AccountService", function(
         var account = null;
         
         return {
+            
+           /* "register" : function(email, password) {
+                
+            },*/
+            
             "authenticate" : function(email, password) {
                 var request = $http.post("/account/authenticate", {
                     "email" : email,

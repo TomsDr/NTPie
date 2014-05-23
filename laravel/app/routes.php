@@ -42,3 +42,13 @@ Route::any("order/index", [
     "as" => "order/index",
     "uses" => "OrderController@indexAction"
 ]);
+
+Route::any("also/index", [
+    "as" => "also/index",
+    "uses" => "AlsoController@indexAction"
+]);
+
+Route::any("gntxml/index", [
+    "as" => "gntxml/index",
+    "uses" => "GntXmlController@indexAction"
+]);
