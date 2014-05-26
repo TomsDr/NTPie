@@ -3,9 +3,6 @@
     <head>
          <title>NTPie Online Store</title>
          <meta charset="utf-8" />
-        {{ HTML::style('/public/css/shared.css') }}
-        
-       
                
           <!--Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">

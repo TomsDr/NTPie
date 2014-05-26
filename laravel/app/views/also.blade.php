@@ -2,40 +2,141 @@
 <html>
     <head>
         <title>NTPie Also</title>
+        <meta charset="utf-8" />
+
+        <style>
+            img{
+                height: 150px;
+                width: 200px;
+                margin: 40px;
+            }
+            
+            .hidden{
+                display: none;
+            }
+            
+            .unhidden{
+                display: block;
+                background-color: #485563;
+            }
+        </style>        
+        
+        <script type="text/javascript">
+  function unhide(motherboards_hidden) {
+    var item = document.getElementById(motherboards_hidden);
+    if (item) {
+      item.className=(item.className==='hidden')?'unhidden':'hidden';
+    }
+  }
+</script> 
+        
+        <!--Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+         <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/superhero/bootstrap.min.css"> 
+        
+         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+         
+         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script> 
+        
     </head>
     <body>
-        <p>Test</p>
-    <?php    
-        $source_file_xml = "C:/wamp/www/laravel/app/views/xmltest.xml";
-  $source_xml = file_get_contents($source_file_xml);
- /* echo $source_xml; */
-  /*
-  xmlhttp.open("POST", $source_xml, true);
-    xmlhttp.send(); */
-   
- /*   $xml = file_get_contents('C:/wamp/www/laravel/app/views/xmltest.xml');
-$url = "http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll";
+        <div class="container">
+        <h1>Kategorijas</h1>
+        <div class="categories">
+            <div class="motherboards">
+                <a href="javascript:unhide('motherboards_hidden');"><img src="http://www.guru3d.com/miraserver/images/2012/z77a-gd65-preview/IMG_5889.jpg" alt="mb_main" id="mb_main"></a>
+                <div id="motherboards_hidden" class="hidden">
+                    <span class="intel">
+                        <a href={{ URL::route('also/intelMB') }}><img src='http://1.bp.blogspot.com/_vo_vJFSyvQU/THgJoUx1SeI/AAAAAAAAACs/xR8InN7D5e4/s1600/intel+motherboard.jpg' alt='intel motherboards'></a>
+                    </span>
+                    <span class="amd">
+                        <img src='http://img.hexus.net/v2/news/sapphire/SAPPHIRE_PI-AM2RS780G.jpg' alt='amd motherboards'>
+                    </span>
+                    <span class="server">
+                        <img src='http://images.anandtech.com/doci/6533/GA-7PESH1%20Oblique.jpg' alt='server motherboards'>
+                    </span>
+                    <span class="accessories">
+                        <img src='http://www.scythe-eu.com/uploads/tx_cfamooflow/Thermal-Elixer-Unit_01.jpg' alt='motherboard accessories'>
+                    </span>
+                </div>
+            </div>
+        </div>
+         
+ <?php
 
-$post_data = array(
-    "xml" => $xml,
-);
+  $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="VendorID"%20Value="80001262"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
 
-$stream_options = array(
-    'http' => array(
-       'method'  => 'POST',
-       'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-       'content' => http_build_query($post_data),
-    ),
-);
+  $context = stream_context_create(array(
+    'http' => array('ignore_errors' => true),
+));
 
-$context  = stream_context_create($stream_options);
-$response = file_get_contents($url, null, $context);
 
+$source_xml1 = file_get_contents($target_url, false, $context);
+
+if($source_xml1 === false)
+{
+        $result_status = "error";
+        $result_message = "Could not load document.";
+        echo $result_message;
+}
+else
+{
+    $result_status = "success";
+    $products = simplexml_load_string($source_xml1);
+//print_r($sxml);
+    foreach($products->xpath('//Product') as $product)
+    {
+        echo "<div class='amd'>"
+        . "<p>Product ID: $product->ProductID</p>",
+             "<p>Description: $product->Description</p>", PHP_EOL;
+    }
+}
+
+
+
+
+/*$product = array();
+$product[0] = $sxml->xpath("//Date");
+
+print_r($product[0]); */
+
+//print_r($sxml->PriceCatalog->PriceCatHdr->Date);
+ // $sxml1 = @simplexml_load_file($target_url);
   
-$xml_url = "http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll";
-    $xml1 = @simplexml_load_file($xml_url);
+
+
+/*$sxml = new SimpleXMLElement($source_xml1);
+
+  echo $sxml->PriceCatalog->PriceCatHdr->Date; */
+/*$products = $sxml->{"Product"};
+
+foreach ($products as $product)
+{
+    $productDescription = $product->{"Description"};
+                echo $productDescription;
+}
+*/
+/*if($source_xml1 === false) 
+    {
+        $result_status = "error";
+        $result_message = "Could not load document.";
+        echo $result_message;
+    }
+else{
+    $items = $source_xml1->xpath("//Product[@Description]");
+     
+            foreach ($items as $item) 
+            {
+                $productDescription = $item->Description;
+                echo $productDescription;
+            } 
     
-    if($xml1 === false) 
+    //echo $source_xml1; 
+}*/
+
+   /* if($source_xml1 === false) 
     {
         $result_status = "error";
         $result_message = "Could not load document.";
@@ -44,16 +145,27 @@ $xml_url = "http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll";
         $result_message = "Document loaded.";
     }
  
-   /* $items = $xml->xpath("//Product[ID = '1872304']");
+   $items = $source_xml1->xpath("//Product");
      
             foreach ($items as $item) 
             {
                 echo $item;
             } */
 
- ?>
+ 
+?>
         
-        <FORM name="Frm" action="http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll" method="POST">
+   <!-- <a href={{ URL::route('gntxml/index') }}><img alt= "Also" src ="http://www.telecom-handel.de/var/ezwebin_site/storage/images/telecom-handel/news/distribution/also-deutschland-goodbye-actebis/540861-1-ger-DE/Also-Deutschland-Goodbye-Actebis_very_large.jpg"></a> -->
+        </div>
+    </body>
+</html>
+
+<!--   <?php
+        $source_file_xml = "C:/wamp/www/laravel/app/views/xmltest.xml";
+  $source_xml = file_get_contents($source_file_xml);
+ ?> -->
+        
+        <!--<FORM name="Frm" action="http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll" method="POST">
 <table width="100%" ID="Table1">
   <input type="hidden" name="MfcISAPICommand" value="Default"/>
   <tr>
@@ -79,92 +191,4 @@ $xml_url = "http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll";
     </td>
   </tr>
 </table>
-</FORM>
-        
- <?php
-
- 
-
- 
-  $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="VendorID"%20Value="80001262"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
-
-  $context = stream_context_create(array(
-    'http' => array('ignore_errors' => true),
-));
-
-
-$source_xml1 = file_get_contents($target_url, false, $context);
-echo $source_xml1; 
- 
-   /* if($source_xml1 === false) 
-    {
-        $result_status = "error";
-        $result_message = "Could not load document.";
-    } else {
-        $result_status = "success";
-        $result_message = "Document loaded.";
-    }
- 
-   $items = $source_xml1->xpath("//Product");
-     
-            foreach ($items as $item) 
-            {
-                echo $item;
-            } */
-
- 
-/*$url = "http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll";
-
-$post_string = '<?xml version="1.0" standalone="yes"?>
-<CatalogRequest xmlns="urn:XMLLink:eLinkCatalog">
-  <Date>2000-12-27T12:55:46</Date>
-  <CatNumber>1.0</CatNumber>
-  <Route>
-    <From>
-      <ClientID>10726237</ClientID>
-    </From>
-    <To>
-      <ClientID>0</ClientID>
-    </To>
-  </Route>
-  <Filters>
-    <Filter FilterID="VendorID" Value="80001262"/>
-    <Filter FilterID="Price" Value="WOVAT"/>
-  </Filters>
-</CatalogRequest>';
-
-
-$header  = "POST HTTP/1.0 \r\n";
-$header .= "Content-type: text/xml \r\n";
-$header .= "Content-length: ".strlen($post_string)." \r\n";
-$header .= "Content-transfer-encoding: text \r\n";
-$header .= "Connection: close \r\n\r\n"; 
-$header .= $post_string;
-
-$postData = array(
-    'login' => 'XmlNTuser623',
-    'pwd' => 'NTxMl262PiedzUser'
-);
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-curl_setopt($ch, CURLOPT_URL,$url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_TIMEOUT, 4);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $header);
-
-$data = curl_exec($ch); 
-
-if(curl_errno($ch))
-    print curl_error($ch);
-else
-    curl_close($ch);
-
-echo $data;*/
-
-?>
-        
-    <a href={{ URL::route('gntxml/index') }}><img alt= "Also" src ="http://www.telecom-handel.de/var/ezwebin_site/storage/images/telecom-handel/news/distribution/also-deutschland-goodbye-actebis/540861-1-ger-DE/Also-Deutschland-Goodbye-Actebis_very_large.jpg"></a>
-    </body>
-</html>
+</FORM>-->

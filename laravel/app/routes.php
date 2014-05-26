@@ -52,3 +52,8 @@ Route::any("gntxml/index", [
     "as" => "gntxml/index",
     "uses" => "GntXmlController@indexAction"
 ]);
+
+Route::any("also/intelMB", [
+    "as" => "also/intelMB",
+    "uses" => "IntelMBController@indexAction"
+]);

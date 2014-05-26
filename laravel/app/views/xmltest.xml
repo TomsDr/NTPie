@@ -11,7 +11,7 @@
     </To>
   </Route>
   <Filters>
-    <Filter FilterID="VendorID" Value="80001262"/>
+    <Filter FilterID="ClassID" Value="L03002001"/>
     <Filter FilterID="Price" Value="WOVAT"/>
   </Filters>
 </CatalogRequest>
