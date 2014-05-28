@@ -68,7 +68,6 @@
                 </div>
             </div> -->
 
-        
  <?php
 
   $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03002001"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
@@ -122,18 +121,20 @@ else
     foreach($products->xpath('//Product') as $product)
     {
         echo "<span class='product'>",
-        //"<a href="javascript:unhide("product_hidden");">",
+        "<a href= 'http://localhost/www/index.php/also/productDetails?id=$product->ProductID' >",
                  "<img src='http://semiaccurate.com/assets/uploads/2011/07/Intel-logo.jpg' alt='intel logo'>",
-                 //"</a>",
-                "<p>Product ID: $product->ProductID</p>",
+                 "</a>",
                 "<p>Description: $product->Description</p>",
-         //"<span id='product_hidden' class='hidden'>",
-               // "<p>Product ID: $product->Product->ProductID</p>",
+         //"<div id='product_hidden' class='hidden'>",
+             //   "<p>Product ID: $product->Product->ProductID</p>",
             // "<p>Description: $product->Product->Description</p>",
-              //  "<p>Price: $product->Price->UnitPrice</p>",
-              // "</span>",
+            //    "<p>Price: $product->Price->UnitPrice</p>",
+            //   "</div>",
                 "</span>",
                 PHP_EOL;
+        
+        $id = $product->ProductID;
+        echo $id;
     }
 }
 

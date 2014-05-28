@@ -57,3 +57,8 @@ Route::any("also/intelMB", [
     "as" => "also/intelMB",
     "uses" => "IntelMBController@indexAction"
 ]);
+
+Route::any("also/productDetails", [
+    "as" => "also/productDetails",
+    "uses" => "productDetailsController@indexAction"
+]);

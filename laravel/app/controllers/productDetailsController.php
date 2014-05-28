@@ -1,11 +1,11 @@
 <?php
 
-class IntelMBController
+class productDetailsController
 extends AlsoController
 {
     public function indexAction()
     {
-        return View::make("intelMB");
+        return View::make("productDetails");
     }
-  
+
 }
