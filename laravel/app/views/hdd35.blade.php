@@ -40,15 +40,15 @@
     </head>
     <body>
         <div class="container">
-        <h1>Intel motherboards</h1>
+        <h1>3.5" Internal Hard Drives</h1>
 
         <?php
+
+            $name = 'hdd35ProductDetails';
             
-            $name = 'intelMBProductDetails';
+            $image = 'http://img.misco.eu/Resources/images/Modules/InformationBlocks/1210/WDG/WDG-1/193016-WD-Green-1TB-3-5inch-SATA-6GB-Internal-Hard-Drive-01.jpg';
         
-            $image = 'http://semiaccurate.com/assets/uploads/2011/07/Intel-logo.jpg';
-            
-            $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03002001"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
+            $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03003002"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
 
             $context = stream_context_create(array(
                 'http' => array('ignore_errors' => true),
@@ -72,7 +72,7 @@
                 {
                     echo "<span class='product'>",
                     "<a href= 'http://localhost/www/index.php/also/productDetails?id=$product->ProductID&name=$name&image=$image' >",
-                    "<img src= '$image' alt='intel logo'>",
+                    "<img src='$image' alt='3.5 hdd logo'>",
                     "</a>",
                     "<p>$product->Description</p>",
                     "</span>",
@@ -84,4 +84,5 @@
         </div>
     </body>
 </html>
+
 

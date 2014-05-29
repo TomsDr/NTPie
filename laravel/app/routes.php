@@ -58,6 +58,71 @@ Route::any("also/intelMB", [
     "uses" => "IntelMBController@indexAction"
 ]);
 
+Route::any("also/amdMB", [
+    "as" => "also/amdMB",
+    "uses" => "AMDMBController@indexAction"
+]);
+
+Route::any("also/serverMB", [
+    "as" => "also/serverMB",
+    "uses" => "ServerMBController@indexAction"
+]);
+
+Route::any("also/accMB", [
+    "as" => "also/accMB",
+    "uses" => "AccMBController@indexAction"
+]);
+
+Route::any("also/hdd25", [
+    "as" => "also/hdd25",
+    "uses" => "HDD25Controller@indexAction"
+]);
+
+Route::any("also/hdd35", [
+    "as" => "also/hdd35",
+    "uses" => "HDD35Controller@indexAction"
+]);
+
+Route::any("also/serverHDD", [
+    "as" => "also/serverHDD",
+    "uses" => "ServerHDDController@indexAction"
+]);
+
+Route::any("also/externalHDD", [
+    "as" => "also/externalHDD",
+    "uses" => "ExternalHDDController@indexAction"
+]);
+
+Route::any("also/accHDD", [
+    "as" => "also/accHDD",
+    "uses" => "AccHDDController@indexAction"
+]);
+
+Route::any("also/ssd", [
+    "as" => "also/ssd",
+    "uses" => "SSDController@indexAction"
+]);
+
+Route::any("also/ddrRAM", [
+    "as" => "also/ddrRAM",
+    "uses" => "DDRRAMController@indexAction"
+]);
+
+Route::any("also/ddr2RAM", [
+    "as" => "also/ddr2RAM",
+    "uses" => "DDR2RAMController@indexAction"
+]);
+
+Route::any("also/ddr3RAM", [
+    "as" => "also/ddr3RAM",
+    "uses" => "DDR3RAMController@indexAction"
+]);
+
+Route::any("also/dsRAM", [
+    "as" => "also/dsRAM",
+    "uses" => "DSRAMController@indexAction"
+]);
+
 Route::any("also/productDetails", [
     "as" => "also/productDetails",
     "uses" => "productDetailsController@indexAction"

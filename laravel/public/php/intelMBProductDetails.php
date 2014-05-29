@@ -1,17 +1,7 @@
 <?php
-
-class productDetailsController
-extends AlsoController
-{
-    public function indexAction()
-    {
-        return View::make("productDetails");
-    }
-    
-    public function productDetails()
-    {
+            
             $identity = $_GET['id'];
-                  
+            
             $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03002001"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
 
             $context = stream_context_create(array(
@@ -53,8 +43,9 @@ extends AlsoController
                 }
             
             }
-           
-            }
-    }
 
-}
+            
+            }
+           
+        ?>
+
