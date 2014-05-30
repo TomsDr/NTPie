@@ -13,9 +13,7 @@
          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
          
          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script> 
-        
-         
-         
+
          <!-- Latest compiled and minified JavaScript -->
       <!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
         
@@ -57,6 +55,7 @@
                      </div>
                  </div>
                  <div class="col-md-4" ng-controller="basket">
+                     <a href={{ URL::route('also/index') }}><img alt= "Also" src ="https://www.karriere-suedwestfalen.de/cms/upload/arbeitgeber/logos/gross/logo_0000308.jpg" id="also"></a>
                      <h2>Basket</h2>
                      <form class="basket">
                          <table class="table">
@@ -82,7 +81,6 @@
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'shopping' }">
-                                     <button type="button" class="pull-left btn btn-default" ng-click="basket.register()" >Register</button>
                                      <button type="button" class="pull-left btn btn-default" ng-click="basket.authenticate()" >Authenticate</button>
                                  </td>
                              </tr>
@@ -109,9 +107,6 @@
                          </table>
                      </form>
                  </div>
-             </div>
-             <div class="row">
-                 <a href={{ URL::route('also/index') }}><img alt= "Also" src ="http://www.telecom-handel.de/var/ezwebin_site/storage/images/telecom-handel/news/distribution/also-deutschland-goodbye-actebis/540861-1-ger-DE/Also-Deutschland-Goodbye-Actebis_very_large.jpg"></a>
              </div>
          </div>    
          {{ HTML::script('/js/shared.js') }}

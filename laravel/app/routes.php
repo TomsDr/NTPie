@@ -28,6 +28,13 @@ Route::any("category/index", [
     "uses" => "CategoryController@indexAction"
 ]);
 
+Route::any("/dev", [
+    "as" => "/dev",
+    "uses" => "DevController@indexAction"
+]);
+
+Route::post('add_category', 'AddCategories@add_category');
+
 Route::any("product/index", [
     "as" => "product/index",
     "uses" => "ProductController@indexAction"
@@ -121,6 +128,26 @@ Route::any("also/ddr3RAM", [
 Route::any("also/dsRAM", [
     "as" => "also/dsRAM",
     "uses" => "DSRAMController@indexAction"
+]);
+
+Route::any("also/agpGPU", [
+    "as" => "also/agpGPU",
+    "uses" => "AGPGPUController@indexAction"
+]);
+
+Route::any("also/pciGPU", [
+    "as" => "also/pciGPU",
+    "uses" => "PCIGPUController@indexAction"
+]);
+
+Route::any("also/pcieGPU", [
+    "as" => "also/pcieGPU",
+    "uses" => "PCIEGPUController@indexAction"
+]);
+
+Route::any("also/accGPU", [
+    "as" => "also/accGPU",
+    "uses" => "AccGPUController@indexAction"
 ]);
 
 Route::any("also/productDetails", [

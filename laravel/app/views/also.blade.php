@@ -47,6 +47,13 @@
                 }
             }
             
+            function unhide(gpu_hidden) {
+                var item = document.getElementById(gpu_hidden);
+                if (item) {
+                    item.className=(item.className==='hidden')?'unhidden':'hidden';
+                }
+            }
+            
         </script> 
         
         <!--Latest compiled and minified CSS -->
@@ -105,7 +112,7 @@
                     </div>
                 </span>
                 <span class="ram">
-                    <a href="javascript:unhide('ram_hidden');"><img src="http://blog-images.barefootfloor.com/images/2012/01/Sticks-of-RAM.jpg" alt="mb_main" id="ram_main"></a>
+                    <a href="javascript:unhide('ram_hidden');"><img src="http://blog-images.barefootfloor.com/images/2012/01/Sticks-of-RAM.jpg" alt="ram_main" id="ram_main"></a>
                     <div id="ram_hidden" class="hidden">
                         <span id="ddr">
                             <a href={{ URL::route('also/ddrRAM') }}><img src='http://www.popularmemory.org/wp-content/uploads/computer-memory.jpg' alt='ddr ram'></a>
@@ -118,6 +125,23 @@
                         </span>
                         <span id="ds_ram">
                             <a href={{ URL::route('also/dsRAM') }}><img src='http://static.techspot.com/fileshost/newspics3/2010/samsung-32gbddr3.jpg' alt='device specific ram'></a>
+                        </span>
+                    </div>
+                </span>
+                <span class="gpu">
+                    <a href="javascript:unhide('gpu_hidden');"><img src="http://static.techspot.com/articles-info/603/images/graphics-cards-2.jpg" alt="gpu_main" id="gpu_main"></a>
+                    <div id="gpu_hidden" class="hidden">
+                        <span id="agpGPU">
+                            <a href={{ URL::route('also/agpGPU') }}><img src='http://www.dansdata.com/images/hcards/hcards440.jpg' alt='agp gpu'></a>
+                        </span>
+                        <span id="pciGPU">
+                            <a href={{ URL::route('also/pciGPU') }}><img src='http://www.techfuels.com/attachment.php?attachmentid=3665&d=1216113659' alt='pci gpu'></a>
+                        </span>
+                        <span id="pcieGPU">
+                            <a href={{ URL::route('also/pcieGPU') }}><img src='http://images.pcworld.com/news/graphics/117070-2209P058_1B.jpg' alt='pcie gpu'></a>
+                        </span>
+                        <span id="accGPU">
+                            <a href={{ URL::route('also/accGPU') }}><img src='http://cdn.ubergizmo.com/photos/2010/2/coolit-universal.JPG' alt='gpu accessories'></a>
                         </span>
                     </div>
                 </span>

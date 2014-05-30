@@ -63,8 +63,7 @@
                 <p> Price: {{ $price }} </p>
         
                 <p> Quantity available: {{ $qty }} </p>
-                <a href="javascript:unhide('details_hidden');">More information</a>
-                
+                <a href="javascript:unhide('details_hidden');">More information</a>                
                 <div id="details_hidden" class="hidden">
                     <p>Product ID: {{ $id }} </p>
                     <p>Part Number: {{ $part_number }} </p>
@@ -74,6 +73,9 @@
                     
             </div>
         </div>
+                 
+
+
     </body>
 </html>
 

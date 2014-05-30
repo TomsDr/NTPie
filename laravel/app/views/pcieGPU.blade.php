@@ -40,15 +40,15 @@
     </head>
     <body>
         <div class="container">
-        <h1>DDR2 RAM</h1>
+        <h1>PCI-Express Graphics Cards</h1>
 
         <?php
 
-            $name = 'DDR2RAMProductDetails';
+            $name = 'pcieGPUProductDetails';
             
-            $image = 'http://www.easy-computer-tech.com/images/ddr2-ram.jpg';
+            $image = 'http://www.dabs.com/images/product/uni2/DigitalContent/8s/8SMR_84B60D91-E406-4C2B-8658-2BE8625EB34E_large.jpg';
         
-            $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03007002"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
+            $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03008003"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
 
             $context = stream_context_create(array(
                 'http' => array('ignore_errors' => true),
@@ -72,7 +72,7 @@
                 {
                     echo "<span class='product'>",
                     "<a href= 'http://localhost/www/index.php/also/productDetails?id=$product->ProductID&name=$name&image=$image' >",
-                    "<img src='$image' alt='ddr2 ram logo'>",
+                    "<img src='$image' alt='pcie gpu logo'>",
                     "</a>",
                     "<p>$product->Description</p>",
                     "</span>",
@@ -84,8 +84,6 @@
         </div>
     </body>
 </html>
-
-
 
 
 
