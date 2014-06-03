@@ -13,21 +13,7 @@
          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
          
          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script> 
-
-         <!-- Latest compiled and minified JavaScript -->
-      <!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
-        
-         
-  <!--      
-        <script
-      type="text/javascript"
-      src="{{ asset("js/angular.min.js") }}"
-    ></script>
-        
-    <script
-      type="text/javascript"
-      src="{{ asset("js/angular.cookies.min.js") }}"
-    ></script> -->  
+ 
     </head>
     
      <body ng-controller="main">
@@ -292,10 +278,6 @@ app.controller("products", function(
 });
 
 app.controller("main", function($scope) {
-   /* console.log("main.init");
-    
-    this.shared = "hello world";*/
-   
     $scope.main = this;
 });
 

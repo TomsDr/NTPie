@@ -1,37 +1,60 @@
 <!doctype html>
 <html>
     <head>
-        <title>NTPie Also</title>
+        <title>NTPie Dev Panel</title>
         <meta charset="utf-8" />  
         
         <!--Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
          <!-- Optional theme -->
-        <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/superhero/bootstrap.min.css">--> 
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/superhero/bootstrap.min.css">
         
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
          
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script> 
-        
+
     </head>
     <body>
         <div class="container">
             <h1>Dev</h1>
-        <div>
+            <div class="message">
+                @if (Session::has('message'))
+                <div class="alert alert-info">{{ Session::get('message') }}</div>
+                 @endif 
+            </div>
+        <div class="add_category">
             <form action="add_category" role="form" method="post">
                 <div class="form_group">
-                    <label for="">Insert new category name</label>
-                    <input type="text" name="name" id="" class="form_control">
                     
+                    <h3><strong>Add new product category</strong></h3>
+                    <p>Insert new category name: </label></p>
+                    <input type="text" name="name" id="" class="form_control">                  
                 </div>
-                
+                <br>
                 <input type="submit" value="Add category" class="btn btn-primary">
             </form>
         </div>
-        
-        
-        
+            <br>
+        <div class="add_product">
+            <form action="add_product" role="form" method="post">
+                <div class="form_group">
+                    <h3><strong>Add new product</strong></h3>
+                    <p>Insert new product name: </p>
+                    <input type="text" name="name" id="" class="form_control">
+                    <p>Insert new product category id: </p>
+                    <input type="text" name="category_id" id="" class="form_control">
+                    <p>Insert price: </p>
+                    <input type="text" name="price" id="" class="form_control">
+                    <p>Insert stock amount: </p>
+                    <input type="text" name="stock" id="" class="form_control">
+                    
+                </div>
+                <br>
+                <input type="submit" value="Add new product" class="btn btn-primary">
+            </form>
+        </div>
+            <br>
          <?php
          
         $source_file_xml = "C:/wamp/www/laravel/app/views/xmltest.xml";
@@ -43,7 +66,7 @@
   <input type="hidden" name="MfcISAPICommand" value="Default"/>
   <tr>
     <td colSpan="2">
-    <TEXTAREA name="XML" rows="31" cols="120" ID="Textarea1"><?php echo $source_xml; ?></TEXTAREA>
+    <TEXTAREA name="XML" rows="31" cols="120" ID="Textarea1" style="color:black"><?php echo $source_xml; ?></TEXTAREA>
     </td>
   </tr>
   <tr>
@@ -55,12 +78,12 @@
   <tr>
     <td>CHECK</td>
     <td>
-      <input type="text" name="CHECK" VALUE="12345"/>
+      <input type="text" name="CHECK" VALUE="12345" style="color:black"/>
     </td>
   </tr>
   <tr>
     <td>
-      <INPUT type="SUBMIT" value="Submit Request"/>
+      <INPUT type="SUBMIT" value="Submit Request" style="color:black"/>
     </td>
   </tr>
 </table>

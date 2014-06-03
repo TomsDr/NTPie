@@ -35,6 +35,12 @@ Route::any("/dev", [
 
 Route::post('add_category', 'AddCategories@add_category');
 
+//Route::post('delete_category', 'DeleteCategories@delete_category');
+
+Route::post('add_product', 'AddProducts@add_product');
+
+Route::post('add_account', 'AddAccounts@add_account');
+
 Route::any("product/index", [
     "as" => "product/index",
     "uses" => "ProductController@indexAction"
