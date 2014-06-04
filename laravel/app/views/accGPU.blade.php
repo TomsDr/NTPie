@@ -47,16 +47,23 @@
             $name = 'accGPUProductDetails';
             
             $image = 'http://www.dabs.ie/images/product/uni2/DigitalContent/96/961R_0D69F0EE-1FAE-4CAB-B6BB-3E15AD868092_large.jpg';
-        
+
+//XMLLink pieprasījums uz kategorijas līmeni                 
+            
             $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03008004"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
 
+//Atļauj garu saišu apstrādi              
+            
             $context = stream_context_create(array(
                 'http' => array('ignore_errors' => true),
             ));
 
-
+//Nolasa XMLLink pieprasījuma atgriezto XML failu 
+            
             $source_xml = file_get_contents($target_url, false, $context);
-
+            
+//Pārbauda XML failu   
+            
             if($source_xml === false)
             {
                 $result_status = "error";
@@ -68,6 +75,8 @@
                 $result_status = "success";
                 $products = simplexml_load_string($source_xml);
 
+//Ģenerē sarakstu ar kategorijas produktiem                 
+                
                 foreach($products->xpath('//Product') as $product)
                 {
                     echo "<span class='product'>",

@@ -1,5 +1,7 @@
 <?php
 
+//Produktu ģenerators
+
 class ProductTableSeeder
 extends DatabaseSeeder
 {
@@ -8,6 +10,8 @@ extends DatabaseSeeder
         $faker = $this->getFaker();
         
         $categories = Category::all();
+
+//Katrā kategorijā izveido nejaušu produktu skaitu        
         
         foreach ($categories as $category)
         {

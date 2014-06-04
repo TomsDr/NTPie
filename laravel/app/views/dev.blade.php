@@ -29,10 +29,10 @@
                     
                     <h3><strong>Add new product category</strong></h3>
                     <p>Insert new category name: </label></p>
-                    <input type="text" name="name" id="" class="form_control">                  
+                    <input type="text" name="name" id="" class="form_control" style="color:black">                  
                 </div>
                 <br>
-                <input type="submit" value="Add category" class="btn btn-primary">
+                <input type="submit" value="Add category" class="btn btn-primary" style="color:black">
             </form>
         </div>
             <br>
@@ -41,17 +41,17 @@
                 <div class="form_group">
                     <h3><strong>Add new product</strong></h3>
                     <p>Insert new product name: </p>
-                    <input type="text" name="name" id="" class="form_control">
+                    <input type="text" name="name" id="" class="form_control" style="color:black">
                     <p>Insert new product category id: </p>
-                    <input type="text" name="category_id" id="" class="form_control">
+                    <input type="text" name="category_id" id="" class="form_control" style="color:black">
                     <p>Insert price: </p>
-                    <input type="text" name="price" id="" class="form_control">
+                    <input type="text" name="price" id="" class="form_control" style="color:black">
                     <p>Insert stock amount: </p>
-                    <input type="text" name="stock" id="" class="form_control">
+                    <input type="text" name="stock" id="" class="form_control" style="color:black">
                     
                 </div>
                 <br>
-                <input type="submit" value="Add new product" class="btn btn-primary">
+                <input type="submit" value="Add new product" class="btn btn-primary" style="color:black">
             </form>
         </div>
             <br>

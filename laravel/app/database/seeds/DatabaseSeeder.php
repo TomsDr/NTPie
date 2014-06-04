@@ -1,9 +1,13 @@
 <?php
 
+//Faker datubbāzes datu ģenerators
+
 class DatabaseSeeder 
 extends Seeder 
 {
     protected $faker;
+
+//Izsauc jaunu Faker instanci
     
     public function getFaker()
     {

@@ -1,5 +1,7 @@
 <?php
 
+//Pasūtījumu satura ģenerators
+
 class OrderItemTableSeeder
 extends DatabaseSeeder
 {
@@ -9,6 +11,8 @@ extends DatabaseSeeder
         
         $orders = Order::all();
         $products = Product::all()->toArray();
+
+//Katram pasūtījumam pievieno nejaušu pasūtīto produktu skaitu        
         
         foreach ($orders as $order)
         {

@@ -34,9 +34,12 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
          
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script> 
-         
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script>         
+        
          <?php 
+         
+         //Ģenerē pieprasījumu pēc vaajdzīgā kontroliera ar produkta info
+         
             require 'C:/wamp/www/laravel/public/php/'.$_GET['name'].'.php';      
          ?>
         
@@ -69,13 +72,9 @@
                     <p>Part Number: {{ $part_number }} </p>
                     <p>EAN Code: {{ $ean }} </p>
                     <p>Warranty: {{ $warranty }} </p>
-                </div>
-                    
+                </div>                   
             </div>
         </div>
-                 
-
-
     </body>
 </html>
 

@@ -1,5 +1,7 @@
 <?php
 
+//Pasūtījumu datu ģenerators
+
 class OrderTableSeeder
 extends DatabaseSeeder
 {
@@ -8,6 +10,8 @@ extends DatabaseSeeder
         $faker = $this->getFaker();
         
         $accounts = Account::all();
+ 
+//Katram lietotāja kontam izveido nejaušu pasūtījumu skaitu
         
         foreach ($accounts as $account)
         {

@@ -3,6 +3,9 @@
 class OrderController
 extends BaseController
 {
+   
+//Atgriež pasūtījumu    
+    
     public function indexAction()
     {
         $query = Order::with([
@@ -21,19 +24,28 @@ extends BaseController
         
         return $query->get();
     }
+
+//Pievieno produktus pasūtījumam    
     
     public function addAction()
     {
+        
+//Pārbauda kontu un pasūtījumā esošos priekšmetus        
+        
         $validator = Validator::make(Input::all(), [
             "account" => "required|exists:account,id",
             "items" => "required"
         ]);
+
+//Izveido jaunu pasūtījumu        
         
         if ($validator->passes())
         {
             $order = Order::create([
                 "account_id" => Input::get("account")
             ]);
+
+//Pārbauda produkta formātu            
             
             try
             {
@@ -50,8 +62,12 @@ extends BaseController
                     ]
                 ]);
             }
+
+//Kopsumma            
             
             $total = 0;
+
+//Iegūst katra produkta, kas ir grozā, info            
             
             foreach ($items as $item)
             {
@@ -68,6 +84,8 @@ extends BaseController
                 
                 $product->stock -= $item->quantity;
                 $product->save();
+ 
+//Iegūst kopsummu                
                 
                 $total += $orderItem->quantity * $orderItem->price;
             }
@@ -78,6 +96,8 @@ extends BaseController
                 $total,
                 "eur"
              );
+    
+//            
             
             if (!$result)
             {
@@ -90,8 +110,12 @@ extends BaseController
                    ]
                ]); 
             }
+
+//Piesaista lietotāja kontu pasūtījumam            
             
             $account = $order->account;
+
+//gatavo pfd dokumentu            
             
             $document = $this->document->create($order);
             $this->messenger->send($order, $document);

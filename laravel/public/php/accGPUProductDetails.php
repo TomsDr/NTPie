@@ -1,53 +1,62 @@
 <?php
-       
-            $identity = $_GET['id'];
+
+//Saņem apskatāmā produkta ID kā GET objektu   
+
+    $identity = $_GET['id'];
                   
-            $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03008004"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
+//XMLLink pieprasījums uz apakškategorijas līmeni         
+    
+    $target_url = 'http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll?MfcISAPICommand=Default&USERNAME=XmlNTuser623&PASSWORD=NTxMl262PiedzUser&XML=<?xml%20version="1.0"%20standalone="yes"?><CatalogRequest%20xmlns="urn:XMLLink:eLinkCatalog"><Date>2000-12-27T12:55:46</Date><CatNumber>1.0</CatNumber><Route><From><ClientID>10726237</ClientID></From><To><ClientID>0</ClientID></To></Route><Filters><Filter%20FilterID="ClassID"%20Value="L03008004"/><Filter%20FilterID="Price"%20Value="WOVAT"/></Filters></CatalogRequest>&CHECK=12345';
 
-            $context = stream_context_create(array(
-                'http' => array('ignore_errors' => true),
-            ));
+//Atļauj garu saišu apstrādi    
+    
+    $context = stream_context_create(array(
+        'http' => array('ignore_errors' => true),
+    ));
 
+//Nolasa XMLLink pieprasījuma atgriezto XML failu
+    
+    $source_xml = file_get_contents($target_url, false, $context);
 
-            $source_xml = file_get_contents($target_url, false, $context);
+//Pārbauda XML failu         
+    
+    if($source_xml === false)
+    {
+        $result_status = "error";
+        $result_message = "Could not load document.";
+        echo $result_message;
+    }
+    else
+    {
+        $result_status = "success";
+        $products = simplexml_load_string($source_xml);
+         
+//Analizē XML failu, meklējot nepieciešamo produkta informāciju        
+        
+        foreach($products->xpath("//CatalogItem/Product[ProductID='{$identity}']") as $product)
+        {   
+            $id = $product->ProductID;
+            $part_number = $product->PartNumber;
+            $ean = $product->EANCode;
+            $warranty = $product->PeriodofWarranty;
+            $desc = $product->Description;
+            $long_desc = $product->LongDesc;
 
-            if($source_xml === false)
+            foreach($product->xpath("../Price") as $product1)
             {
-                $result_status = "error";
-                $result_message = "Could not load document.";
-                echo $result_message;
+                $price =  $product1->UnitPrice;
             }
-            else
+            
+            foreach($product->xpath("../Qty[@WarehouseID='1']") as $product1)
             {
-                $result_status = "success";
-                $products = simplexml_load_string($source_xml);
-            
-          
-                foreach($products->xpath("//CatalogItem/Product[ProductID='{$identity}']") as $product){
-            
-                $id = $product->ProductID;
-                $part_number = $product->PartNumber;
-                $ean = $product->EANCode;
-                $warranty = $product->PeriodofWarranty;
-                $desc = $product->Description;
-                $long_desc = $product->LongDesc;
-
-                foreach($product->xpath("../Price") as $product1){
-                    $price =  $product1->UnitPrice;
-            
-                }
-            
-                foreach($product->xpath("../Qty[@WarehouseID='1']") as $product1){
-                $qty =  $product1->QtyAvailable;
-            
-                }
-            
+                $qty =  $product1->QtyAvailable;         
             }
-
             
-            }
+        }
+
+    }
            
-        ?>
+?>
 
 
 

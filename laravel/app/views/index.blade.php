@@ -13,7 +13,6 @@
          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
          
          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-cookies.js"></script> 
- 
     </head>
     
      <body ng-controller="main">
@@ -22,6 +21,11 @@
                  <div class="col-md-12">
                      <h1>NTPie Online Store</h1>
                  </div>
+                             <div class="message">
+                @if (Session::has('message'))
+                <div class="alert alert-info">{{ Session::get('message') }}</div>
+                 @endif 
+            </div>
              </div>
              <div class="row">
                  <div class="col-md-8" ng-controller="products">
@@ -43,7 +47,7 @@
                  <div class="col-md-4" ng-controller="basket">
                      <a href={{ URL::route('also/index') }}><img alt= "Also" src ="https://www.karriere-suedwestfalen.de/cms/upload/arbeitgeber/logos/gross/logo_0000308.jpg" id="also"></a>
                      <h2>Basket</h2>
-                     <form class="basket">
+                     <form class="basket" name="signup_form">
                          <table class="table">
                              <tr class="product" ng-repeat="product in basket.products track by $index" ng-class="{ 'hide' : basket.state != 'shopping' }">
                                  <td class="name">@{{ product.name }}</td>
@@ -57,12 +61,19 @@
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'shopping' }">
-                                     <input type="text" name="email" class="form-control" placeholder="email" ng-model="basket.email" />
+                                     <input type="email" name="email" class="form-control" placeholder="email" ng-model="basket.email" id="email" required/>
+                                         <div class="error-container" ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+                                            <small class="error" ng-show="signup_form.email.$error.required">Your email is required.</small>
+                                            <small class="error" ng-show="signup_form.email.$error.email">That is not a valid email. Please input a valid email.</small>
+                                        </div>
                                  </td>
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'shopping' }">
-                                     <input type="password" name="password" class="form-control" placeholder="password" ng-model="basket.password" />
+                                     <input type="password" name="password" class="form-control" placeholder="password" ng-model="basket.password" required/>
+                                        <div class="error-container" ng-show="signup_form.password.$dirty && signup_form.password.$invalid">
+                                            <small class="error" ng-show="signup_form.password.$error.required">Your password is required.</small>
+                                        </div>
                                  </td>
                              </tr>
                              <tr>
@@ -72,17 +83,32 @@
                              </tr>
                              <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'paying' }">
-                                     <input type="text" class="form-control" placeholder="card number" ng-model="basket.number" />
+                                     <input type="text" name="card_number" class="form-control" placeholder="card number" ng-model="basket.number" ng-minlength="16" ng-maxlength="16" required/>
+                                        <div class="error-container" ng-show="signup_form.card_number.$dirty && signup_form.card_number.$invalid">
+                                            <small class="error" ng-show="signup_form.card_number.$error.required">Your card number is required.</small>
+                                            <small class="error" ng-show="signup_form.card_number.$error.minlength">Security number must be 16 characters long.</small>
+                                            <small class="error" ng-show="signup_form.card_number.$error.maxlength">Security number must be 16 characters long.</small>
+                                        </div>
                                  </td>
                              </tr>
                               <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'paying' }">
-                                     <input type="text" class="form-control" placeholder="expiry" ng-model="basket.expiry" />
+                                     <input type="text" name="expiry" class="form-control" placeholder="expiry" ng-model="basket.expiry" ng-minlength="4" ng-maxlength="4" required />
+                                        <div class="error-container" ng-show="signup_form.expiry.$dirty && signup_form.expiry.$invalid">
+                                            <small class="error" ng-show="signup_form.expiry.$error.required">Your expiry date required.</small>
+                                            <small class="error" ng-show="signup_form.expiry.$error.minlength">Security number must be 4 characters long.</small>
+                                            <small class="error" ng-show="signup_form.expiry.$error.maxlength">Security number must be 4 characters long.</small>
+                                        </div>
                                  </td>
                              </tr>
                               <tr>
                                  <td colspan="4" ng-class="{ 'hide' : basket.state != 'paying' }">
-                                     <input type="text" class="form-control" placeholder="security number" ng-model="basket.security" />
+                                     <input type="text" name="security_number" class="form-control" placeholder="security number" ng-model="basket.security" ng-minlength="3" ng-maxlength="3" required/>
+                                        <div class="error-container" ng-show="signup_form.security_number.$dirty && signup_form.security_number.$invalid">
+                                            <small class="error" ng-show="signup_form.security_number.$error.required">Your security number is required.</small>
+                                            <small class="error" ng-show="signup_form.security_number.$error.minlength">Security number must be 3 characters long.</small>
+                                            <small class="error" ng-show="signup_form.security_number.$error.maxlength">Security number must be 3 characters long.</small>
+                                        </div>
                                  </td>
                              </tr>
                              <tr>
@@ -95,17 +121,10 @@
                  </div>
              </div>
          </div>    
-         {{ HTML::script('/js/shared.js') }}
-         <script type="text/javascript">
+<script type="text/javascript">
             var app = angular.module("app", ["ngCookies"]);
 
-
-/*
-app.controller("products", function($scope) {
-    console.log("products.init:", $scope.main.shared);
-    
-    $scope.products = this;
-});*/
+//Ataino kategorijas
 
 app.factory("CategoryService", function($http) {
     return {
@@ -114,6 +133,8 @@ app.factory("CategoryService", function($http) {
         }
     };
 });
+
+//Ataino produktus
 
 app.factory("ProductService", function($http) {
     return {
@@ -125,12 +146,16 @@ app.factory("ProductService", function($http) {
 
 app.factory("BasketService", function($cookies){
     var products = JSON.parse($cookies.products || "[]");
-    
+
+//Iegūšt produktus, tiek glabāti JSON masīvā    
+        
     return {
         "getProducts" : function() {
             return products;
         },
-        
+ 
+//Pievieno produktu grozam 
+ 
         "add" : function(product) {
             products.push({
                 "id" : product.id,
@@ -142,7 +167,9 @@ app.factory("BasketService", function($cookies){
             
             this.store();
         },
-        
+
+//Izņem no groza
+
         "remove" : function(product) {
             for (var i = 0; i < products.length; i++) {
                 var next = products[i];
@@ -154,7 +181,9 @@ app.factory("BasketService", function($cookies){
             
             this.store();
         },
-        
+
+//Atjauno groza saturu, produktu cenu (to noapaļojot)
+
         "update" : function() {
             for (var i = 0; i < products.length; i++) {
                 var product = products[i];
@@ -165,11 +194,15 @@ app.factory("BasketService", function($cookies){
             
             this.store();
         },
-        
+
+//Saglabā cookies pašreizējo groza saturu
+
         "store" : function() {
             $cookies.products = JSON.stringify(products);
         },
-        
+
+//Iztīra grozu
+
         "clear" : function() {
             products.length = 0;
             this.store();
@@ -183,6 +216,9 @@ app.factory("AccountService", function(
         var account = null;
         
         return {
+            
+//Autentifikācija            
+           
             "authenticate" : function(email, password) {
                 var request = $http.post("/account/authenticate", {
                     "email" : email,
@@ -198,7 +234,9 @@ app.factory("AccountService", function(
                 return request;
                 
             },
-            
+ 
+//Atgriež konta info 
+ 
             "getAccount" : function() {
                 return account;
             }
@@ -211,6 +249,9 @@ app.factory("OrderService", function(
     BasketService
   ) {
       return {
+          
+//Maksājumu loģika         
+         
           "pay" : function(number, expiry, security) {
               var account = AccountService.getAccount();
               var products = BasketService.getProducts();
@@ -243,12 +284,17 @@ app.controller("products", function(
     BasketService
 ) {
     var self = this;
+    
+//Iegūst kategorijas
+
     var categories = CategoryService.getCategories();
     
     categories.success(function(data) {
         self.categories = data;
     });
-    
+
+//Iegūst produktus
+        
     var products = ProductService.getProducts();
     
     products.success(function(data) {
@@ -268,7 +314,9 @@ app.controller("products", function(
     this.setCategory = function(category) {
         self.category = category;
     };
-    
+
+//Pievieno grozam    
+        
     this.addToBasket = function(product){
         BasketService.add(product);
     };
@@ -280,6 +328,8 @@ app.controller("products", function(
 app.controller("main", function($scope) {
     $scope.main = this;
 });
+
+//Groza loģika
 
 app.controller("basket", function(
     $scope,

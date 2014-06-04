@@ -3,6 +3,9 @@
 class ProductController
 extends BaseController
 {
+    
+//Atgriež visus produktus, kas ietilpst kategorijās    
+    
     public function indexAction()
     {
         $query = Product::with(["category"]);

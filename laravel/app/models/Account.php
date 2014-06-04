@@ -44,7 +44,7 @@ implements UserInterface, RemindableInterface
     {
         return 'remember_token';
     }
-    
+
     public function orders()
     {
         return $this->hasMany("Order");

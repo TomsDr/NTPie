@@ -149,36 +149,3 @@
         </div>
     </body>
 </html>
-
-<!--   <?php
-        $source_file_xml = "C:/wamp/www/laravel/app/views/xmltest.xml";
-  $source_xml = file_get_contents($source_file_xml);
- ?> -->
-        
-        <!--<FORM name="Frm" action="http://b2b.alsolatvia.lv/DirectXML.svc/2/scripts/XML_Interface.dll" method="POST">
-<table width="100%" ID="Table1">
-  <input type="hidden" name="MfcISAPICommand" value="Default"/>
-  <tr>
-    <td colSpan="2">
-    <TEXTAREA name="XML" rows="31" cols="120" ID="Textarea1"><?php echo $source_xml; ?></TEXTAREA>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <input type="hidden" name="USERNAME" VALUE="XmlNTuser623"/>
-      <input type="hidden" name="PASSWORD" VALUE="NTxMl262PiedzUser"/>
-    </td>
-  </tr>
-  <tr>
-    <td>CHECK</td>
-    <td>
-      <input type="text" name="CHECK" VALUE="12345"/>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <INPUT type="SUBMIT" value="Submit Request"/>
-    </td>
-  </tr>
-</table>
-</FORM>-->
