@@ -21,11 +21,6 @@
                  <div class="col-md-12">
                      <h1>NTPie Online Store</h1>
                  </div>
-                             <div class="message">
-                @if (Session::has('message'))
-                <div class="alert alert-info">{{ Session::get('message') }}</div>
-                 @endif 
-            </div>
              </div>
              <div class="row">
                  <div class="col-md-8" ng-controller="products">
@@ -122,7 +117,7 @@
              </div>
          </div>    
 <script type="text/javascript">
-            var app = angular.module("app", ["ngCookies"]);
+var app = angular.module("app", ["ngCookies"]);
 
 //Ataino kategorijas
 

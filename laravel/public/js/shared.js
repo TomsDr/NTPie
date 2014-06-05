@@ -1,18 +1,6 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 var app = angular.module("app", ["ngCookies"]);
 
-
-/*
-app.controller("products", function($scope) {
-    console.log("products.init:", $scope.main.shared);
-    
-    $scope.products = this;
-});*/
+//Ataino kategorijas
 
 app.factory("CategoryService", function($http) {
     return {
@@ -21,6 +9,8 @@ app.factory("CategoryService", function($http) {
         }
     };
 });
+
+//Ataino produktus
 
 app.factory("ProductService", function($http) {
     return {
@@ -32,12 +22,16 @@ app.factory("ProductService", function($http) {
 
 app.factory("BasketService", function($cookies){
     var products = JSON.parse($cookies.products || "[]");
-    
+
+//Iegūšt produktus, tiek glabāti JSON masīvā    
+        
     return {
         "getProducts" : function() {
             return products;
         },
-        
+ 
+//Pievieno produktu grozam 
+ 
         "add" : function(product) {
             products.push({
                 "id" : product.id,
@@ -49,7 +43,9 @@ app.factory("BasketService", function($cookies){
             
             this.store();
         },
-        
+
+//Izņem no groza
+
         "remove" : function(product) {
             for (var i = 0; i < products.length; i++) {
                 var next = products[i];
@@ -61,7 +57,9 @@ app.factory("BasketService", function($cookies){
             
             this.store();
         },
-        
+
+//Atjauno groza saturu, produktu cenu (to noapaļojot)
+
         "update" : function() {
             for (var i = 0; i < products.length; i++) {
                 var product = products[i];
@@ -72,11 +70,15 @@ app.factory("BasketService", function($cookies){
             
             this.store();
         },
-        
+
+//Saglabā cookies pašreizējo groza saturu
+
         "store" : function() {
             $cookies.products = JSON.stringify(products);
         },
-        
+
+//Iztīra grozu
+
         "clear" : function() {
             products.length = 0;
             this.store();
@@ -91,10 +93,8 @@ app.factory("AccountService", function(
         
         return {
             
-           /* "register" : function(email, password) {
-                
-            },*/
-            
+//Autentifikācija            
+           
             "authenticate" : function(email, password) {
                 var request = $http.post("/account/authenticate", {
                     "email" : email,
@@ -110,7 +110,9 @@ app.factory("AccountService", function(
                 return request;
                 
             },
-            
+ 
+//Atgriež konta info 
+ 
             "getAccount" : function() {
                 return account;
             }
@@ -123,6 +125,9 @@ app.factory("OrderService", function(
     BasketService
   ) {
       return {
+          
+//Maksājumu loģika         
+         
           "pay" : function(number, expiry, security) {
               var account = AccountService.getAccount();
               var products = BasketService.getProducts();
@@ -155,12 +160,17 @@ app.controller("products", function(
     BasketService
 ) {
     var self = this;
+    
+//Iegūst kategorijas
+
     var categories = CategoryService.getCategories();
     
     categories.success(function(data) {
         self.categories = data;
     });
-    
+
+//Iegūst produktus
+        
     var products = ProductService.getProducts();
     
     products.success(function(data) {
@@ -180,7 +190,9 @@ app.controller("products", function(
     this.setCategory = function(category) {
         self.category = category;
     };
-    
+
+//Pievieno grozam    
+        
     this.addToBasket = function(product){
         BasketService.add(product);
     };
@@ -190,12 +202,10 @@ app.controller("products", function(
 });
 
 app.controller("main", function($scope) {
-   /* console.log("main.init");
-    
-    this.shared = "hello world";*/
-   
     $scope.main = this;
 });
+
+//Groza loģika
 
 app.controller("basket", function(
     $scope,
@@ -226,7 +236,7 @@ app.controller("basket", function(
         var details = AccountService.authenticate(self.email, self.password);
         
         details.success(function(data) {
-            if (data.status === "ok") {
+            if (data.status == "ok") {
                 self.state = "paying";
             }
         });
